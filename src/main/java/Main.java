@@ -9,7 +9,7 @@ import java.util.List;
  * <h2>Выполнение домашнего задания 2 (HW2).</h1>
  *
  * @author Сорокина Надежда, группа ЗБ-ПИ21-2.
- * <p><a href="https://www.github.com">Удаленный репозиторий проекта на Github.</a>
+ * <p><a href="https://github.com/not-fate/HW2">Удаленный репозиторий проекта на Github.</a>
  * @version 30.11.2024
  */
 public class Main {
