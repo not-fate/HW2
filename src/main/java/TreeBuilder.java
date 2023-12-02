@@ -22,7 +22,7 @@ public class TreeBuilder {
 
             var node = nodesMap.get(id);
             if (node.getParentNode() != null)
-                throw new TreeBuilderException("Дублирование id узла: " + id); // Нельзя создать Node с одинаковым id.
+                throw new TreeBuilderException("Дублирование id узла: " + id); // id узла должно быть уникальным в пределах программы.
 
 
             if (parentId != id) {
@@ -45,16 +45,21 @@ public class TreeBuilder {
                         "и упоминается только в качестве родителя.");
         return trees;
     }
+
     static class TreeBuilderException extends Exception {
         public TreeBuilderException(String message) {
             super(message);
         }
     }
 
+    /**
+     * Т.к. дерево по определению является нецикличным графом, необходимо убедиться, что узлы не зацикливаются.
+     * @throws TreeBuilderException, если обнаружена цикличность.
+     */
     private static void checkLoop(Tree.Node node) throws TreeBuilderException {
         var set = new HashSet<Integer>();
         while (!node.isRoot()) {
-            if (set.contains(node.getId())) throw new TreeBuilderException("Обнаружено зацикливание дерева.");
+            if (set.contains(node.getId())) throw new TreeBuilderException("Обнаружено зацикливание.");
             set.add(node.getId());
             node = node.getParentNode();
         }
