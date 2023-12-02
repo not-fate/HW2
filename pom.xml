@@ -13,6 +13,8 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/drivers/h2-2.2.224.jar</systemPath>-->
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
@@ -20,6 +22,8 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.0</version>
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/drivers/postgresql-42.7.0.jar</systemPath>-->
         </dependency>
 
     </dependencies>
