@@ -1,11 +1,11 @@
-package DBConnectors;
+package DBHandlers;
 import java.io.IOException;
 
 /**
  * <H2>Реализация DatabaseHandler для работы с PostgreSQL.</H2>
  */
-public class PostgreSQLReader extends DatabaseHandler {
-    public PostgreSQLReader() throws IOException {
+public class PostgreSQLHandler extends DatabaseHandler {
+    public PostgreSQLHandler() throws IOException {
         super("src/main/resources/db-configs/postgres.properties");
     }
 }

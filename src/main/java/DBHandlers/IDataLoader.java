@@ -1,10 +1,10 @@
-package DBConnectors;
+package DBHandlers;
 
 import java.sql.SQLException;
 import java.util.List;
 
 
-public interface IReader {
+public interface IDataLoader {
     /**
      * <h3>Представление записи из таблицы TREES.</h3>
      * @param id уникальный идентификатор узла;

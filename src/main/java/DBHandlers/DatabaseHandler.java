@@ -1,4 +1,4 @@
-package DBConnectors;
+package DBHandlers;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,30 +12,19 @@ import java.util.Properties;
 /**
  * <h2><b>DatabaseHandler</b> инкапсулирует методы для
  * создания подключения и получения данных из БД.</h2>
- * <p> Он реализует интерфейс {@link IReader}.
- * <p> Этот абстрактный класс предназначен для создания обработчиков, адаптированных к различным системам баз данных.
+ * <p> Этот абстрактный класс предназначен для создания обработчиков, адаптированных к различным БД.
  *
  */
-public abstract class DatabaseHandler implements IReader {
+public abstract class DatabaseHandler implements IDataLoader {
     /**
-     * Объект {@link Properties}, используемый для обработки конфигурации, содержащей данные для подключения к базе данных.
+     * Объект {@link Properties}, используемый для обработки конфигурации, содержащей данные для подключения к БД.
      */
     protected Properties config = new Properties();
 
     /**
-     * URL для подключения к базе данных.
+     * Данные для подключения.
      */
-    protected final String URL;
-
-    /**
-     * Имя пользователя для доступа к базе данных.
-     */
-    protected final String USER;
-
-    /**
-     * Пароль для доступа к базе данных.
-     */
-    protected final String PASSWORD;
+    protected final String URL, USER, PASSWORD;
 
     /**
      * Инициализирует DatabaseHandler, загружая детали подключения из значений переданного <i>properties</i>.
@@ -58,12 +47,9 @@ public abstract class DatabaseHandler implements IReader {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    /**
+    /** Реализация интерфейса {@link IDataLoader}.
      * Извлекает данные из БД и возвращает список объектов {@link Row}.
-     * <p> Метод считывает таблицу "TREES", после чего собирает результат в <code>ArrayList</code>.
-     * Каждый элемент <code>ArrayList</code> содержит <code>record</code> {@link Row} с двумя полями типа <code>int</code>:
-     * <p><b>— id</b> (уникальный идентификатор узла),</p>
-     * <p><b>— parentID</b> (уникальный идентификатор родительского узла).</p>
+     * <p> Метод считывает таблицу "TREES", после чего собирает результат в список.
      *
      * @return Список Row, содержащий извлеченные данные.
      */

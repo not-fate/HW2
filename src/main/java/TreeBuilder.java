@@ -1,16 +1,32 @@
-import DBConnectors.IReader.Row;
+import DBHandlers.IDataLoader.Row;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-
+/**
+ * Класс, реализующий построение списка деревьев.
+ */
 public class TreeBuilder {
+
+    /**
+     * Checked-исключение для ситуаций, когда невозможно построить список деревьев.
+     */
+    public static class InvalidTreeStructureException extends Exception {
+        public InvalidTreeStructureException(String message) {
+            super(message);
+        }
+    }
+
     /**
      * Строит список деревьев ({@link Tree}) на основе данных из <code>List<{@link Row}></code>.
+     *
+     * @throws InvalidTreeStructureException при дублировании id узла;
+     *                                       обнаружении узла, упоминаемого только в качестве родителя;
+     *                                       обнаружении зацикливания.
      */
-    public static ArrayList<Tree> createListOfTrees(List<Row> data) throws Exception {
+    public static ArrayList<Tree> createListOfTrees(List<Row> data) throws InvalidTreeStructureException {
         var nodesMap = new HashMap<Integer, Tree.Node>();
         for (Row row : data) {
 
@@ -22,7 +38,8 @@ public class TreeBuilder {
 
             var node = nodesMap.get(id);
             if (node.getParentNode() != null)
-                throw new TreeBuilderException("Дублирование id узла: " + id); // id узла должно быть уникальным в пределах программы.
+                // id узла должно быть уникальным в пределах программы.
+                throw new InvalidTreeStructureException("Дублирование id узла: " + id);
 
 
             if (parentId != id) {
@@ -41,25 +58,20 @@ public class TreeBuilder {
 
         for (var node : nodesMap.values())
             if (node.getParentNode() == null)
-                throw new TreeBuilderException("Узел " + node.getId() + " не создается явно " +
+                throw new InvalidTreeStructureException("Узел " + node.getId() + " не создается явно " +
                         "и упоминается только в качестве родителя.");
         return trees;
     }
 
-    static class TreeBuilderException extends Exception {
-        public TreeBuilderException(String message) {
-            super(message);
-        }
-    }
-
     /**
      * Т.к. дерево по определению является нецикличным графом, необходимо убедиться, что узлы не зацикливаются.
-     * @throws TreeBuilderException, если обнаружена цикличность.
+     *
+     * @throws InvalidTreeStructureException если обнаружена цикличность.
      */
-    private static void checkLoop(Tree.Node node) throws TreeBuilderException {
+    private static void checkLoop(Tree.Node node) throws InvalidTreeStructureException {
         var set = new HashSet<Integer>();
         while (!node.isRoot()) {
-            if (set.contains(node.getId())) throw new TreeBuilderException("Обнаружено зацикливание.");
+            if (set.contains(node.getId())) throw new InvalidTreeStructureException("Обнаружено зацикливание.");
             set.add(node.getId());
             node = node.getParentNode();
         }

@@ -8,7 +8,7 @@ public class Tree {
      * <h3>Вложенный класс, представляющий узел дерева.</h3>
      * <ul>
      *     <li> id - уникальный идентификатор узла;</li>
-     *     <li> parentNode - ссылка на родителький узел;</li>
+     *     <li> parentNode - ссылка на родительский узел;</li>
      *     <li> children - список дочерних узлов.</li>
      * </ul>
      */
@@ -51,6 +51,7 @@ public class Tree {
 
         /**
          * Установить родительский узел.
+         *
          * @param parent ссылка на родителя.
          */
         public void setParentNode(Node parent) {
@@ -80,6 +81,7 @@ public class Tree {
 
     /**
      * Создание дерева на основе ссылки на корневой узел дерева.
+     *
      * @param root ссылка на корень.
      */
     public Tree(Node root) {
@@ -88,7 +90,7 @@ public class Tree {
 
     /**
      * Получить список всех узлов дерева.
-     * <p> <b>Метод реализован при помощи стэка.</b>
+     * <p> <b>Метод реализован при помощи {@link Stack}.</b>
      * @return список всех узлов дерева.
      */
     public List<Node> getNodes() {
@@ -107,6 +109,7 @@ public class Tree {
      * Получить список всех листьев дерева.
      * <p> <b>Метод реализован на базе {@link #getNodes()} при помощи
      * фильтрации на основе {@link Node#isLeaf()}.</b>
+     *
      * @return список всех листьев дерева.
      */
     public List<Node> getLeaves() {
