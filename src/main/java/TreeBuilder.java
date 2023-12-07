@@ -21,7 +21,6 @@ public class TreeBuilder {
 
     /**
      * Строит список деревьев ({@link Tree}) на основе данных из <code>List<{@link Row}></code>.
-     *
      * @throws InvalidTreeStructureException при дублировании id узла;
      *                                       обнаружении узла, упоминаемого только в качестве родителя;
      *                                       обнаружении зацикливания.
@@ -65,7 +64,6 @@ public class TreeBuilder {
 
     /**
      * Т.к. дерево по определению является нецикличным графом, необходимо убедиться, что узлы не зацикливаются.
-     *
      * @throws InvalidTreeStructureException если обнаружена цикличность.
      */
     private static void checkLoop(Tree.Node node) throws InvalidTreeStructureException {

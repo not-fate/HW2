@@ -13,7 +13,6 @@ import java.util.Properties;
  * <h2><b>DatabaseHandler</b> инкапсулирует методы для
  * создания подключения и получения данных из БД.</h2>
  * <p> Этот абстрактный класс предназначен для создания обработчиков, адаптированных к различным БД.
- *
  */
 public abstract class DatabaseHandler implements IDataLoader {
     /**
@@ -28,7 +27,6 @@ public abstract class DatabaseHandler implements IDataLoader {
 
     /**
      * Инициализирует DatabaseHandler, загружая детали подключения из значений переданного <i>properties</i>.
-     *
      * @param path Путь к файлу конфигурации.
      */
     public DatabaseHandler(String path) throws IOException {
@@ -40,7 +38,6 @@ public abstract class DatabaseHandler implements IDataLoader {
 
     /**
      * Устанавливает соединение с базой данных с использованием сохраненных деталей подключения.
-     *
      * @return {@link Connection}, представляющий подключение к базе данных.
      */
     public Connection getConnection() throws SQLException {
@@ -49,9 +46,6 @@ public abstract class DatabaseHandler implements IDataLoader {
 
     /** Реализация интерфейса {@link IDataLoader}.
      * Извлекает данные из БД и возвращает список объектов {@link Row}.
-     * <p> Метод считывает таблицу "TREES", после чего собирает результат в список.
-     *
-     * @return Список Row, содержащий извлеченные данные.
      */
     @Override
     public List<Row> load() throws SQLException {
