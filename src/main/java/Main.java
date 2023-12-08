@@ -1,6 +1,7 @@
-import DBHandlers.H2Handler;
 import DBHandlers.IDataLoader.Row;
 import DBHandlers.PostgreSQLHandler;
+import Trees.Tree;
+import Trees.TreeBuilder;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) throws Exception {
-        List<Row> H2LoadedData = new H2Handler().load();
+        List<Row> H2LoadedData = new PostgreSQLHandler().load();
         List<Tree> TreesFromH2 = TreeBuilder.createListOfTrees(H2LoadedData);
         Files.writeString(Path.of("output.csv"), String.valueOf(sum(TreesFromH2)));
     }
