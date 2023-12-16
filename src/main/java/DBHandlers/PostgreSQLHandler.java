@@ -6,7 +6,7 @@ import java.io.IOException;
  */
 public class PostgreSQLHandler extends DatabaseHandler {
     public PostgreSQLHandler() throws IOException {
-        super("src/main/resources/db-configs/postgres.properties");
+        super("/db-configs/postgres.properties");
     }
 }
 

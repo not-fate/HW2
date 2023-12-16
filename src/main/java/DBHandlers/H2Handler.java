@@ -6,6 +6,6 @@ import java.io.IOException;
  */
 public class H2Handler extends DatabaseHandler {
     public H2Handler() throws IOException {
-        super("src/main/resources/db-configs/h2.properties");
+        super("/db-configs/h2.properties");
     }
 }

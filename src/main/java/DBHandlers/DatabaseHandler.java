@@ -1,6 +1,6 @@
 package DBHandlers;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -30,7 +30,8 @@ public abstract class DatabaseHandler implements IDataLoader {
      * @param path Путь к файлу конфигурации.
      */
     public DatabaseHandler(String path) throws IOException {
-        config.load(new FileReader(path));
+        InputStream input = getClass().getResourceAsStream(path);
+        config.load(input);
         URL = config.getProperty("URL");
         USER = config.getProperty("USER");
         PASSWORD = config.getProperty("PASSWORD");
